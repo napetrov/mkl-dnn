@@ -18,8 +18,12 @@ jobs:
       mkdir -p build && cd build && cmake $CMAKE_OPTIONS ..
     displayName: 'cmake'
   - script: |
-      cd build && make
+      cd build && make && cp -R src/libmkldnn.so* $(Build.ArtifactStagingDirectory)/
     displayName: 'make'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: build
   - script: |
       cd build && ctest
     displayName: 'ctest'
