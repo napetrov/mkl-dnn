@@ -42,3 +42,12 @@ jobs:
   - script: |
       cd build && ctest
     displayName: 'ctest'
+
+- job: Windows
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - script: set "PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin;%PATH%"
+  - script: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64
+  - script: mkdir build & cd build && cmake -G "Visual Studio 15 2017 Win64" ..
+  - script: cd build & msbuild "Intel(R) MKL-DNN.sln" /p:Configuration=Release [/t:rebuild] /m
