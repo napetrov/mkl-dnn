@@ -6,18 +6,35 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'Ubuntu-16.04'
+jobs:
+- job: Linux
+  timeoutInMinutes: 0
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  steps:
+  - script: |
+      sudo apt-get install doxygen
+  - script: |
+      mkdir -p build && cd build && cmake $CMAKE_OPTIONS ..
+    displayName: 'cmake'
+  - script: |
+      cd build && make
+    displayName: 'make'
+  - script: |
+      cd build && ctest
+    displayName: 'ctest'
 
-steps:
-- script: |
-    sudo apt-get install doxygen
-- script: |
-    mkdir -p build && cd build && cmake $CMAKE_OPTIONS ..
-  displayName: 'cmake'
-- script: |
-    cd build && make
-  displayName: 'make'
-- script: |
-    cd build && ctest
-  displayName: 'ctest'
+- job: MacOS
+  timeoutInMinutes: 0
+  pool:
+    vmImage: 'macOS-10.14'
+  steps:
+  - script: |
+      mkdir -p build && cd build && cmake $CMAKE_OPTIONS ..
+    displayName: 'cmake'
+  - script: |
+      cd build && make
+    displayName: 'make'
+  - script: |
+      cd build && ctest
+    displayName: 'ctest'
