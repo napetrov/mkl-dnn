@@ -28,6 +28,30 @@ jobs:
       cd build && ctest
     displayName: 'ctest'
 
+- job: Linux_coverity
+  timeoutInMinutes: 0
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  steps:
+  - script: |
+      sudo apt-get install doxygen
+  - script: |
+      mkdir -p build && cd build && cmake $CMAKE_OPTIONS ..
+    displayName: 'cmake'
+  - script: |
+      wget https://scan.coverity.com/download/cxx/linux64 && gunzip cov-analysis-linux64-2017.07.tar.gz && tar -xvf cov-analysis-linux64-2017.07.tar
+  - script: |
+      cd build && ../cov-analysis-linux64-2017.07/bin/cov-build --dir cov-int make -j2 && tar -czvf myproject.tgz cov-int && cp -R myproject.tgz $(Build.ArtifactStagingDirectory)/
+    displayName: 'make'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: build_coverity
+  - script: |
+      curl --form token=EV4JFbcuyr4CshadrWxCmA --form email=nikolay.a.petrov@intel.com --form file=build/myproject.tgz --form version="0.9"  --form description="Description"  https://scan.coverity.com/builds?project=MKL-DNN
+    displayName: 'upload'
+
+
 - job: MacOS
   timeoutInMinutes: 0
   pool:
