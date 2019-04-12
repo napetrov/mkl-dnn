@@ -16,8 +16,8 @@ steps:
     mkdir -p build && cd build && cmake $CMAKE_OPTIONS ..
   displayName: 'cmake'
 - script: |
-    pwd && ls -al && make
+    cd build && make
   displayName: 'make'
 - script: |
-    ctest
+    cd build && ctest
   displayName: 'ctest'
