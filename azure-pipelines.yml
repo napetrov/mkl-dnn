@@ -37,7 +37,7 @@ jobs:
       mkdir -p build && cd build && cmake $CMAKE_OPTIONS ..
     displayName: 'cmake'
   - script: |
-      cd build && make && cp -R src/libmkldnn.so* $(Build.ArtifactStagingDirectory)/
+      cd build && make ; cp -R src/lib* $(Build.ArtifactStagingDirectory)/ || ls -al /src
     displayName: 'make'
   - task: PublishBuildArtifacts@1
     inputs:
@@ -53,7 +53,7 @@ jobs:
     vmImage: 'windows-2019'
   steps:
   - script: cd scripts && call prepare_mkl.bat && cd ..
-  - script: mkdir build & cd build && cmake -G "Visual Studio 15 2017 Win64" ..
+  - script: mkdir build & cd build && cmake -G "Visual Studio 16 2019 Win64" ..
   - task: MSBuild@1
     inputs:
       solution: 'build\Intel(R) MKL-DNN.sln'
