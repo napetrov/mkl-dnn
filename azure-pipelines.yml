@@ -37,7 +37,12 @@ jobs:
       mkdir -p build && cd build && cmake $CMAKE_OPTIONS ..
     displayName: 'cmake'
   - script: |
-      cd build && make
+      cd build && make && cp -R src/libmkldnn.so* $(Build.ArtifactStagingDirectory)/
+    displayName: 'make'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: build
     displayName: 'make'
   - script: |
       cd build && ctest
@@ -45,10 +50,8 @@ jobs:
 
 - job: Windows
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'vs2019-win2019'
   steps:
-  - script: set "PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin;%PATH%"
-  - script: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64
   - script: cd scripts && call prepare_mkl.bat && cd ..
   - script: mkdir build & cd build && cmake -G "Visual Studio 15 2017 Win64" ..
   - task: MSBuild@1
@@ -57,3 +60,6 @@ jobs:
       msbuildArchitecture: 'x64'
       configuration: 'Release'
       clean: true
+  - script: |
+      cd build && ctest
+    displayName: 'ctest'
