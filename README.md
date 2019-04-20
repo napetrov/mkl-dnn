@@ -1,5 +1,5 @@
 # Intel(R) Math Kernel Library for Deep Neural Networks (Intel(R) MKL-DNN)
-![v0.90 beta](https://img.shields.io/badge/v0.90-beta-orange.svg) [![Build Status](https://dev.azure.com/nikolayapetrov/MKL-DNN_experiments/_apis/build/status/napetrov.mkl-dnn?branchName=master)](https://dev.azure.com/nikolayapetrov/MKL-DNN_experiments/_build/latest?definitionId=2&branchName=master)
+![v0.90 beta](https://img.shields.io/badge/v0.90-beta-orange.svg) [![Build Status](https://dev.azure.com/mkldnn/mkl-dnn/_apis/build/status/napetrov.mkl-dnn?branchName=master)](https://dev.azure.com/mkldnn/mkl-dnn/_build/latest?definitionId=1&branchName=master)
 
 > NOTE
 >
