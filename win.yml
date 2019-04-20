@@ -9,7 +9,7 @@ trigger:
 jobs:
 - job: Windows
   pool:
-    vmImage: 'windows2019'
+    vmImage: 'windows-2019'
   steps:
   - script: cd scripts && call prepare_mkl.bat && cd ..
   - script: mkdir build & cd build && cmake -G "Visual Studio 16 2019" -A x64 ..
