@@ -20,7 +20,7 @@ addons:
     # GitHub project metadata
     # ** specific to your project **
     project:
-      name: napetrov/mkl-dnn
+      name: MKL-DNN
       version: 1.0
       description: My Project
 
