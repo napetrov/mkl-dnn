@@ -1,4 +1,4 @@
-dist: trusty
+dist: bionic
 
 language: cpp
 
@@ -13,9 +13,6 @@ before_install:
     sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' |
     sudo tee -a /etc/ssl/certs/ca-certificates.crt
   - sudo iptables -F
-  - mkdir m4
-  - autoreconf -fi
-  - ./configure --disable-root-actions --with-noaaport --with-multicast
 
 addons:
   coverity_scan:
