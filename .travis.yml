@@ -1,0 +1,5 @@
+language: cpp
+git:
+  quiet: true
+script: mkdir -p build && cd build && cmake $CMAKE_OPTIONS ..
+script: cd build && make
