@@ -1,7 +1,5 @@
 dist: bionic
 
-language: cpp
-
 before_install:
   # The Coverity Scan certificate-chain is missing an intermediate certificate
   - >
