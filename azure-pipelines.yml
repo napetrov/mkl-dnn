@@ -32,6 +32,7 @@ jobs:
       testRunner: 'CTest'
       testResultsFiles: '**/TEST-*.xml'
       platform: 'Linux'
+      searchFolder: '$(System.DefaultWorkingDirectory)/build'
 
 - job: MacOS
   timeoutInMinutes: 0
@@ -57,6 +58,7 @@ jobs:
       testRunner: 'CTest'
       testResultsFiles: '**/TEST-*.xml'
       platform: 'MacOS'
+      searchFolder: '$(System.DefaultWorkingDirectory)/build'
 
 - job: Windows
   pool:
@@ -78,3 +80,5 @@ jobs:
       testRunner: 'CTest'
       testResultsFiles: '**/TEST-*.xml'
       platform: 'Windows'
+      searchFolder: '$(System.DefaultWorkingDirectory)/build'
+        
