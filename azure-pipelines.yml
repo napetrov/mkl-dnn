@@ -27,6 +27,11 @@ jobs:
   - script: |
       cd build && ctest
     displayName: 'ctest'
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: 'CTest'
+      testResultsFiles: '**/TEST-*.xml'
+      platform: 'Linux'
 
 - job: MacOS
   timeoutInMinutes: 0
@@ -47,6 +52,11 @@ jobs:
   - script: |
       cd build && ctest
     displayName: 'ctest'
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: 'CTest'
+      testResultsFiles: '**/TEST-*.xml'
+      platform: 'MacOS'
 
 - job: Windows
   pool:
@@ -63,3 +73,8 @@ jobs:
   - script: |
       cd build && ctest
     displayName: 'ctest'
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: 'CTest'
+      testResultsFiles: '**/TEST-*.xml'
+      platform: 'Windows'
