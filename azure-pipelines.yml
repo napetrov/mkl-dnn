@@ -24,13 +24,14 @@ jobs:
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
       artifactName: build
+    displayName: 'PublishBuildArtifacts'
   - script: |
-      cd build && ctest
+      cd build && ctest -O test_logs.txt -R simple
     displayName: 'ctest'
   - task: PublishTestResults@2
     inputs:
       testRunner: 'CTest'
-      testResultsFiles: '**/TEST-*.xml'
+      testResultsFiles: '_*.txt'
       platform: 'Linux'
       searchFolder: '$(System.DefaultWorkingDirectory)/build'
 
