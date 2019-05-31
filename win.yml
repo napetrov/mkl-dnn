@@ -12,8 +12,6 @@ jobs:
     vmImage: 'windows-2019'
   steps:
   - script: cd scripts && call prepare_mkl.bat && cd ..
-  - script: cmake -version
-  - script: where cmake
   - script: mkdir build & cd build && cmake -G "Visual Studio 16 2019" -A x64 ..
   - task: MSBuild@1
     inputs:
